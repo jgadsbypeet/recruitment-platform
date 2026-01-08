@@ -125,6 +125,8 @@ export function getCurrentUser() {
   return {
     id: "user-1",
     name: "Sarah Chen",
+    email: "sarah.chen@rspca.org.uk",
+    role: "admin",
   };
 }
 
