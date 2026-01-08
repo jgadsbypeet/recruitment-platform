@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Sparkles, Users, Briefcase, Settings, LayoutDashboard } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { getCurrentUser } from "@/data/data-service";
+import { getCurrentUser } from "@/data/static-data";
 import { getInitials } from "@/lib/utils";
 
 export default function AdminLayout({

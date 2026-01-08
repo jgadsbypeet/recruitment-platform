@@ -26,7 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { createRole, generateJobDescription } from "@/data/data-service";
+import { createRoleAction, generateJobDescriptionAction } from "@/app/actions";
 import { toast } from "@/hooks/use-toast";
 import { GenderScoreCard } from "./gender-score-card";
 
@@ -94,7 +94,7 @@ export function CreateRoleModal() {
 
     setIsGenerating(true);
     try {
-      const generated = await generateJobDescription(title, department);
+      const generated = await generateJobDescriptionAction(title, department);
       setValue("description", generated);
       setDescription(generated);
       toast({
@@ -119,7 +119,7 @@ export function CreateRoleModal() {
     try {
       const filteredRequirements = requirements.filter((r) => r.trim());
       
-      await createRole({
+      await createRoleAction({
         title: data.title,
         department: data.department,
         location: data.location,

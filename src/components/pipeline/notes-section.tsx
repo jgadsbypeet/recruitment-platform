@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { noteSchema, type NoteFormValues } from "@/lib/validation";
-import { addNote, getCandidateById } from "@/data/data-service";
+import { addNoteAction, getCandidateByIdAction } from "@/app/actions";
 import { toast } from "@/hooks/use-toast";
 import { formatRelativeTime, cn } from "@/lib/utils";
 
@@ -63,8 +63,8 @@ export function NotesSection({ candidate, onCandidateUpdate }: NotesSectionProps
   const onSubmit = async (data: NoteFormValues) => {
     setIsSubmitting(true);
     try {
-      await addNote(candidate.id, data.content, data.type);
-      const updatedCandidate = await getCandidateById(candidate.id);
+      await addNoteAction(candidate.id, data.content, data.type);
+      const updatedCandidate = await getCandidateByIdAction(candidate.id);
       if (updatedCandidate) {
         onCandidateUpdate(updatedCandidate);
       }

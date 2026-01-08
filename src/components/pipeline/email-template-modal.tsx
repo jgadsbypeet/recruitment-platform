@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { getEmailTemplateForStage } from "@/data/data-service";
+import { getEmailTemplateForStage } from "@/data/static-data";
 import { toast } from "@/hooks/use-toast";
 
 interface EmailTemplateModalProps {

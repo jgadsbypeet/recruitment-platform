@@ -1,0 +1,191 @@
+// Prisma Schema for Recruitment Platform
+// =======================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ============================================
+// ENUMS
+// ============================================
+
+enum Stage {
+  applied
+  review
+  interview
+  offer
+  rejected
+}
+
+enum RoleType {
+  full_time
+  part_time
+  contract
+  internship
+}
+
+enum RoleStatus {
+  open
+  closed
+  draft
+}
+
+enum NoteType {
+  general
+  interview
+  reference
+  internal
+}
+
+enum UserRole {
+  admin
+  recruiter
+  interviewer
+  viewer
+}
+
+// ============================================
+// MODELS
+// ============================================
+
+model Role {
+  id           String     @id @default(cuid())
+  title        String
+  department   String
+  location     String
+  type         RoleType   @default(full_time)
+  description  String     @db.Text
+  requirements String[]
+  salaryMin    Int?
+  salaryMax    Int?
+  salaryCurrency String?  @default("USD")
+  status       RoleStatus @default(open)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  // Relations
+  candidates   Candidate[]
+  questions    ApplicationQuestion[]
+
+  @@map("roles")
+}
+
+model ApplicationQuestion {
+  id          String   @id @default(cuid())
+  roleId      String
+  question    String
+  type        String   @default("text") // text, textarea, select, radio
+  required    Boolean  @default(false)
+  options     String[] // For select/radio types
+  placeholder String?
+  maxLength   Int?
+  order       Int      @default(0)
+
+  // Relations
+  role        Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  answers     QuestionAnswer[]
+
+  @@map("application_questions")
+}
+
+model Candidate {
+  id             String   @id @default(cuid())
+  roleId         String
+  firstName      String
+  lastName       String
+  email          String
+  phone          String?
+  linkedIn       String?
+  portfolio      String?
+  resumeUrl      String?
+  coverLetter    String?  @db.Text
+  stage          Stage    @default(applied)
+  tags           String[]
+  appliedAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  // Relations
+  role           Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  notes          Note[]
+  scores         Score[]
+  questionAnswers QuestionAnswer[]
+
+  @@map("candidates")
+}
+
+model QuestionAnswer {
+  id          String   @id @default(cuid())
+  candidateId String
+  questionId  String
+  answer      String   @db.Text
+
+  // Relations
+  candidate   Candidate @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  question    ApplicationQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([candidateId, questionId])
+  @@map("question_answers")
+}
+
+model Note {
+  id          String   @id @default(cuid())
+  candidateId String
+  authorId    String
+  authorName  String
+  content     String   @db.Text
+  type        NoteType @default(general)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  candidate   Candidate @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+
+  @@map("notes")
+}
+
+model ScoreCategory {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  maxScore    Int      @default(5)
+  order       Int      @default(0)
+
+  // Relations
+  scores      Score[]
+
+  @@map("score_categories")
+}
+
+model Score {
+  id            String   @id @default(cuid())
+  candidateId   String
+  categoryId    String
+  value         Int
+  evaluatorId   String
+  evaluatorName String
+  comment       String?  @db.Text
+  createdAt     DateTime @default(now())
+
+  // Relations
+  candidate     Candidate     @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  category      ScoreCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@unique([candidateId, categoryId, evaluatorId])
+  @@map("scores")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  role      UserRole @default(viewer)
+  avatar    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}

@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Star, Plus, User, BarChart3 } from "lucide-react";
-import type { Candidate, Score } from "@/types";
+import type { Candidate, Score, ScoreCategory } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { addScore, getCandidateById, getScoreCategories } from "@/data/data-service";
+import { addScoreAction, getCandidateByIdAction, getScoreCategoriesAction } from "@/app/actions";
 import { toast } from "@/hooks/use-toast";
 import { cn, calculateAverageScore } from "@/lib/utils";
 
@@ -28,8 +28,12 @@ export function ScoringSection({ candidate, onCandidateUpdate }: ScoringSectionP
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedScore, setSelectedScore] = useState(0);
   const [comment, setComment] = useState("");
+  const [categories, setCategories] = useState<ScoreCategory[]>([]);
 
-  const categories = getScoreCategories();
+  useEffect(() => {
+    getScoreCategoriesAction().then(setCategories);
+  }, []);
+
   const avgScore = calculateAverageScore(candidate.scores);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -38,8 +42,8 @@ export function ScoringSection({ candidate, onCandidateUpdate }: ScoringSectionP
 
     setIsSubmitting(true);
     try {
-      await addScore(candidate.id, selectedCategory, selectedScore, comment || undefined);
-      const updatedCandidate = await getCandidateById(candidate.id);
+      await addScoreAction(candidate.id, selectedCategory, selectedScore, comment || undefined);
+      const updatedCandidate = await getCandidateByIdAction(candidate.id);
       if (updatedCandidate) {
         onCandidateUpdate(updatedCandidate);
       }

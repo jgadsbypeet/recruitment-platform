@@ -17,7 +17,7 @@ import type { Candidate, StageInfo, Role, Stage } from "@/types";
 import { PipelineColumn } from "./pipeline-column";
 import { CandidateCard } from "./candidate-card";
 import { CandidateDetailModal } from "./candidate-detail-modal";
-import { updateCandidateStage } from "@/data/data-service";
+import { updateCandidateStageAction } from "@/app/actions";
 import { toast } from "@/hooks/use-toast";
 
 interface PipelineBoardProps {
@@ -93,7 +93,7 @@ export function PipelineBoard({ candidates: initialCandidates, stages, roles }: 
     );
 
     try {
-      await updateCandidateStage(candidateId, newStage);
+      await updateCandidateStageAction(candidateId, newStage);
       toast({
         title: "Status Updated",
         description: `${candidate.firstName} moved to ${stages.find((s) => s.id === newStage)?.label}`,
@@ -123,7 +123,7 @@ export function PipelineBoard({ candidates: initialCandidates, stages, roles }: 
     );
 
     try {
-      await updateCandidateStage(candidateId, newStage);
+      await updateCandidateStageAction(candidateId, newStage);
       toast({
         title: "Status Updated",
         description: `${candidate.firstName} moved to ${stages.find((s) => s.id === newStage)?.label}`,

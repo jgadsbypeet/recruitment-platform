@@ -1,7 +1,7 @@
 import { User, Bell, Shield, Palette, Database } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { getCurrentUser } from "@/data/data-service";
+import { getCurrentUser } from "@/data/static-data";
 
 export default function SettingsPage() {
   const user = getCurrentUser();

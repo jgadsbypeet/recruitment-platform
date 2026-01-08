@@ -34,6 +34,7 @@ import { cn, formatDate, getInitials } from "@/lib/utils";
 import { NotesSection } from "./notes-section";
 import { ScoringSection } from "./scoring-section";
 import { EmailTemplateModal } from "./email-template-modal";
+import { summarizeCandidateNotesAction } from "@/app/actions";
 
 interface CandidateDetailModalProps {
   candidate: Candidate;
@@ -359,11 +360,14 @@ function AIAssistantPlaceholder({ candidateId }: { candidateId: string }) {
 
   const handleGenerateSummary = async () => {
     setIsGenerating(true);
-    // Simulate AI processing
-    const { summarizeCandidateNotes } = await import("@/data/data-service");
-    const result = await summarizeCandidateNotes(candidateId);
-    setSummary(result);
-    setIsGenerating(false);
+    try {
+      const result = await summarizeCandidateNotesAction(candidateId);
+      setSummary(result);
+    } catch (error) {
+      setSummary("Failed to generate summary. Please try again.");
+    } finally {
+      setIsGenerating(false);
+    }
   };
 
   return (

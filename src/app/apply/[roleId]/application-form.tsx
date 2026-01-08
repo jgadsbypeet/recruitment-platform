@@ -18,7 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { applicationSchema } from "@/lib/validation";
-import { createCandidate } from "@/data/data-service";
+import { createCandidateAction } from "@/app/actions";
 import { toast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import type { ApplicationQuestion, QuestionAnswer } from "@/types";
@@ -94,7 +94,7 @@ export function ApplicationForm({ roleId, roleTitle, questions = [] }: Applicati
         answer: questionAnswers[q.id] || "",
       })).filter((a) => a.answer);
 
-      await createCandidate({
+      await createCandidateAction({
         roleId,
         firstName: data.firstName,
         lastName: data.lastName,

@@ -1,5 +1,6 @@
 import { Suspense } from "react";
-import { getCandidates, getRoles, getStages } from "@/data/data-service";
+import { getCandidates, getRoles } from "@/data/data-service";
+import { getStages } from "@/data/static-data";
 import { PipelineBoard } from "@/components/pipeline/pipeline-board";
 import { PipelineSkeleton } from "@/components/pipeline/pipeline-skeleton";
 import { RoleFilter } from "@/components/pipeline/role-filter";
