@@ -234,6 +234,7 @@ export async function createCandidateAction(
     linkedIn?: string;
     portfolio?: string;
     coverLetter?: string;
+    questionAnswers?: { questionId: string; question: string; answer: string }[];
     stage: Stage;
   }
 ) {
@@ -248,6 +249,7 @@ export async function createCandidateAction(
         linkedIn: candidateData.linkedIn,
         portfolio: candidateData.portfolio,
         coverLetter: candidateData.coverLetter,
+        questionAnswers: candidateData.questionAnswers ? JSON.stringify(candidateData.questionAnswers) : undefined,
         stage: candidateData.stage as PrismaStage,
         tags: [],
       },
