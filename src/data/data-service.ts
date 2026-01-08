@@ -214,9 +214,7 @@ export async function getCandidates(): Promise<Candidate[]> {
       scores: {
         include: { category: true },
       },
-      questionAnswers: {
-        include: { question: true },
-      },
+      questionAnswers: true,
     },
     orderBy: { appliedAt: "desc" },
   });
@@ -236,11 +234,13 @@ export async function getCandidates(): Promise<Candidate[]> {
     tags: c.tags,
     appliedAt: c.appliedAt.toISOString(),
     updatedAt: c.updatedAt.toISOString(),
-    questionAnswers: c.questionAnswers.map((qa) => ({
-      questionId: qa.questionId,
-      question: qa.question.question,
-      answer: qa.answer,
-    })),
+    questionAnswers: c.questionAnswers?.length > 0
+      ? c.questionAnswers.map((qa) => ({
+          questionId: qa.questionId,
+          question: "", // Question text would come from role.questions
+          answer: qa.answer,
+        }))
+      : undefined,
     notes: c.notes.map((n) => ({
       id: n.id,
       candidateId: n.candidateId,
