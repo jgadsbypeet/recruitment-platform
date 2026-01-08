@@ -4,58 +4,64 @@
 
 @layer base {
   :root {
-    --background: 40 30% 98%;
-    --foreground: 20 20% 12%;
-    --card: 40 25% 97%;
-    --card-foreground: 20 20% 12%;
-    --popover: 40 30% 99%;
-    --popover-foreground: 20 20% 12%;
-    --primary: 25 85% 45%;
-    --primary-foreground: 40 30% 98%;
-    --secondary: 200 25% 92%;
-    --secondary-foreground: 200 30% 25%;
-    --muted: 40 20% 94%;
-    --muted-foreground: 20 15% 45%;
-    --accent: 170 45% 40%;
-    --accent-foreground: 40 30% 98%;
-    --destructive: 0 70% 50%;
-    --destructive-foreground: 40 30% 98%;
-    --border: 30 20% 88%;
-    --input: 30 20% 88%;
-    --ring: 25 85% 45%;
-    --radius: 0.625rem;
-    --stage-applied: 210 70% 50%;
-    --stage-review: 45 90% 45%;
-    --stage-interview: 280 65% 50%;
-    --stage-offer: 145 60% 40%;
-    --stage-rejected: 0 60% 50%;
+    /* RSPCA Brand Palette - 2024 Rebrand by jkr */
+    /* Deep Purple #260071 | Bright Blue #2722F8 | Light Blue #A0DCFE */
+    /* Orange-Red #EE5335 | Cream #FFF2E2 | Yellow #ECE94E */
+    
+    --background: 30 100% 94%;          /* Cream #FFF2E2 */
+    --foreground: 260 100% 22%;         /* Deep Purple #260071 */
+    --card: 0 0% 100%;
+    --card-foreground: 260 100% 22%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 260 100% 22%;
+    --primary: 241 87% 55%;             /* Bright Blue #2722F8 */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 201 97% 81%;           /* Light Blue #A0DCFE */
+    --secondary-foreground: 260 100% 22%;
+    --muted: 30 40% 90%;
+    --muted-foreground: 260 40% 40%;
+    --accent: 9 83% 57%;                /* Orange-Red #EE5335 */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 9 83% 57%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 260 20% 85%;
+    --input: 260 20% 85%;
+    --ring: 241 87% 55%;
+    --radius: 0.5rem;
+    /* Pipeline stages using RSPCA colors */
+    --stage-applied: 241 87% 55%;       /* Bright Blue */
+    --stage-review: 56 80% 62%;         /* Yellow #ECE94E */
+    --stage-interview: 260 100% 22%;    /* Deep Purple */
+    --stage-offer: 145 60% 40%;         /* Green */
+    --stage-rejected: 9 83% 57%;        /* Orange-Red */
   }
 
   .dark {
-    --background: 20 15% 8%;
-    --foreground: 40 20% 95%;
-    --card: 20 15% 10%;
-    --card-foreground: 40 20% 95%;
-    --popover: 20 15% 12%;
-    --popover-foreground: 40 20% 95%;
-    --primary: 25 80% 55%;
-    --primary-foreground: 20 15% 8%;
-    --secondary: 200 20% 18%;
-    --secondary-foreground: 200 15% 85%;
-    --muted: 20 15% 18%;
-    --muted-foreground: 40 15% 65%;
-    --accent: 170 40% 45%;
-    --accent-foreground: 20 15% 8%;
-    --destructive: 0 65% 55%;
-    --destructive-foreground: 40 30% 98%;
-    --border: 20 15% 20%;
-    --input: 20 15% 20%;
-    --ring: 25 80% 55%;
-    --stage-applied: 210 65% 55%;
-    --stage-review: 45 85% 50%;
-    --stage-interview: 280 60% 60%;
+    /* Dark mode - Deep Purple base */
+    --background: 260 80% 8%;
+    --foreground: 30 100% 94%;          /* Cream */
+    --card: 260 60% 12%;
+    --card-foreground: 30 100% 94%;
+    --popover: 260 60% 14%;
+    --popover-foreground: 30 100% 94%;
+    --primary: 241 87% 65%;             /* Bright Blue (lighter) */
+    --primary-foreground: 260 100% 8%;
+    --secondary: 201 60% 30%;
+    --secondary-foreground: 201 97% 85%;
+    --muted: 260 40% 18%;
+    --muted-foreground: 260 20% 65%;
+    --accent: 9 83% 62%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 9 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 260 40% 22%;
+    --input: 260 40% 22%;
+    --ring: 241 87% 65%;
+    --stage-applied: 241 80% 60%;
+    --stage-review: 56 75% 55%;
+    --stage-interview: 260 60% 50%;
     --stage-offer: 145 55% 50%;
-    --stage-rejected: 0 55% 55%;
+    --stage-rejected: 9 75% 55%;
   }
 
   * {

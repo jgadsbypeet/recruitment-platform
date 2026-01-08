@@ -1,25 +1,20 @@
 import type { Metadata } from "next";
-import { Crimson_Pro, Source_Sans_3 } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
-const crimsonPro = Crimson_Pro({
+const roboto = Roboto({
   subsets: ["latin"],
-  variable: "--font-crimson",
-  display: "swap",
-});
-
-const sourceSans = Source_Sans_3({
-  subsets: ["latin"],
-  variable: "--font-source-sans",
+  weight: ["300", "400", "500", "700"],
+  variable: "--font-roboto",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Talent Flow | Recruitment Platform",
+  title: "RSPCA Careers | Recruitment Platform",
   description:
-    "A human-centric applicant tracking system built with accessibility in mind",
+    "Join us in our mission to rescue, rehabilitate and rehome animals in need",
 };
 
 export default function RootLayout({
@@ -28,8 +23,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${crimsonPro.variable} ${sourceSans.variable}`}>
-      <body className={`min-h-screen bg-background font-sans antialiased ${sourceSans.className}`}>
+    <html lang="en" className={roboto.variable}>
+      <body className={`min-h-screen bg-background font-sans antialiased ${roboto.className}`}>
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
