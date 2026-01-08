@@ -249,7 +249,9 @@ export async function createCandidateAction(
         linkedIn: candidateData.linkedIn,
         portfolio: candidateData.portfolio,
         coverLetter: candidateData.coverLetter,
-        questionAnswers: candidateData.questionAnswers ? JSON.stringify(candidateData.questionAnswers) : undefined,
+        questionAnswers: candidateData.questionAnswers && candidateData.questionAnswers.length > 0
+          ? { create: candidateData.questionAnswers }
+          : undefined,
         stage: candidateData.stage as PrismaStage,
         tags: [],
       },
