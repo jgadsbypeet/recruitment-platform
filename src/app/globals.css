@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 30% 98%;
+    --foreground: 20 20% 12%;
+    --card: 40 25% 97%;
+    --card-foreground: 20 20% 12%;
+    --popover: 40 30% 99%;
+    --popover-foreground: 20 20% 12%;
+    --primary: 25 85% 45%;
+    --primary-foreground: 40 30% 98%;
+    --secondary: 200 25% 92%;
+    --secondary-foreground: 200 30% 25%;
+    --muted: 40 20% 94%;
+    --muted-foreground: 20 15% 45%;
+    --accent: 170 45% 40%;
+    --accent-foreground: 40 30% 98%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 40 30% 98%;
+    --border: 30 20% 88%;
+    --input: 30 20% 88%;
+    --ring: 25 85% 45%;
+    --radius: 0.625rem;
+    --stage-applied: 210 70% 50%;
+    --stage-review: 45 90% 45%;
+    --stage-interview: 280 65% 50%;
+    --stage-offer: 145 60% 40%;
+    --stage-rejected: 0 60% 50%;
+  }
+
+  .dark {
+    --background: 20 15% 8%;
+    --foreground: 40 20% 95%;
+    --card: 20 15% 10%;
+    --card-foreground: 40 20% 95%;
+    --popover: 20 15% 12%;
+    --popover-foreground: 40 20% 95%;
+    --primary: 25 80% 55%;
+    --primary-foreground: 20 15% 8%;
+    --secondary: 200 20% 18%;
+    --secondary-foreground: 200 15% 85%;
+    --muted: 20 15% 18%;
+    --muted-foreground: 40 15% 65%;
+    --accent: 170 40% 45%;
+    --accent-foreground: 20 15% 8%;
+    --destructive: 0 65% 55%;
+    --destructive-foreground: 40 30% 98%;
+    --border: 20 15% 20%;
+    --input: 20 15% 20%;
+    --ring: 25 80% 55%;
+    --stage-applied: 210 65% 55%;
+    --stage-review: 45 85% 50%;
+    --stage-interview: 280 60% 60%;
+    --stage-offer: 145 55% 50%;
+    --stage-rejected: 0 55% 55%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  .skip-link {
+    @apply absolute left-0 top-0 z-50 -translate-y-full bg-primary px-4 py-2 text-primary-foreground transition-transform focus:translate-y-0;
+  }
+}
+
+@layer utilities {
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+}
