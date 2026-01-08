@@ -62,7 +62,8 @@ export function delay(ms: number): Promise<void> {
  * Format salary range for display
  */
 export function formatSalary(min: number, max: number, currency: string): string {
-  const formatter = new Intl.NumberFormat("en-US", {
+  const locale = currency === "GBP" ? "en-GB" : "en-US";
+  const formatter = new Intl.NumberFormat(locale, {
     style: "currency",
     currency,
     maximumFractionDigits: 0,
