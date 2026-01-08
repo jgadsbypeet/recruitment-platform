@@ -9,6 +9,8 @@ import { NoteType, Stage as PrismaStage, RoleType, RoleStatus } from "@prisma/cl
 const CURRENT_USER = {
   id: "user-1",
   name: "Sarah Chen",
+  email: "sarah.chen@rspca.org.uk",
+  role: "admin" as const,
 };
 
 export async function updateCandidateStageAction(
